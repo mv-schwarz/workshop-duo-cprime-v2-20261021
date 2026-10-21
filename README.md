@@ -91,6 +91,31 @@ Talk to the lead: `rig capture orch-lead@workshop-duo` reads its screen and
 Stop the team with `rig down workshop-duo`. The builder's git worktrees under
 `.worktrees/` stay; remove them with `git worktree remove` when you are done.
 
+**Cleaning up after the team.** `rig down` removes OpenRig's instruction
+blocks from `CLAUDE.local.md` and `AGENTS.md` (in an all-Claude trial on
+OpenRig 0.6.14, `CLAUDE.local.md` was gone afterwards). Everything else listed
+under "What it writes" stays until you remove it:
+
+- **In your clone:** the hooks OpenRig merged into `.claude/settings.local.json`
+  (delete only the entries that run OpenRig's `activity-relay.cjs` and keep any
+  of your own; if OpenRig created the file, you can delete it), the `/.openrig/`
+  folder, and the skill folders the rig projected into `.claude/skills/` or
+  `.agents/skills/`. Remove only the folders named under `resources.skills` in
+  `agents/workshop/agent.yaml`, never the whole skills folder, because your
+  repository may keep its own skills there. The `.git/info/exclude` lines can
+  stay; they hide nothing once the files are gone.
+- **The install folder:** delete the `--target` folder (for example
+  `~/rigs/workshop-duo`) once the team is stopped. To also drop OpenRig's record
+  of the stopped team, run `rig down workshop-duo --delete`; after that,
+  `rig up workshop-duo --existing` can no longer bring it back.
+- **In your home folder:** the Codex hooks and settings in
+  `~/.codex/config.toml`, the Claude Code workspace trust in `~/.claude.json`,
+  and the discovery skills in `~/.claude/skills` and `~/.agents/skills` belong
+  to your OpenRig install, not to this team. Other OpenRig teams use them too,
+  so leave them while you use OpenRig. If you remove OpenRig itself, edit those
+  files by hand and remove only OpenRig's entries, because the same files hold
+  your own Codex and Claude Code settings.
+
 ## Permissions
 
 Both seats keep their permission prompts. `rig.yaml` sets no
