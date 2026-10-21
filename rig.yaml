@@ -1,0 +1,75 @@
+# Modified by mv-schwarz, 2026-10-21, from Workshop (rigs/workshop/rig.yaml in
+# github.com/mvschwarz/openrig-world at fa38c9b55e013e600a3472d2f7561df32df79ce8,
+# Apache-2.0). Changes: two seats (lead and builder) instead of four, new name,
+# and OpenRig's ask-first team launch default instead of builtin:yolo. See NOTICE.
+version: "0.2"
+name: workshop-duo
+summary: >
+  A two-seat team based on OpenRig's Workshop, launched in your repository with
+  --cwd: a lead who takes your goal, scopes it and checks the result, and a
+  builder who makes the change. Both seats ask you before anything risky.
+
+culture_file: CULTURE.md
+
+docs:
+  - path: README.md
+
+# Start steps shared by every seat; each seat's role file comes from its profile.
+startup:
+  files:
+    - path: startup/context.md
+      delivery_hint: send_text
+      required: true
+  # Each seat proves it received its start steps and can reach OpenRig.
+  # `rig ps --nodes` shows ORIENTED: verified, or missing until it does.
+  actions:
+    - type: startup_proof
+      value: authenticated
+      idempotent: true
+
+# OpenRig writes its instruction blocks into each seat's working directory.
+# Claude Code seats get them in CLAUDE.local.md, so they stay out of a
+# project's own CLAUDE.md. Codex seats always use AGENTS.md. The README says
+# how to keep both files out of your pull requests.
+managed_blocks:
+  claude-code: CLAUDE.local.md
+
+# No permission_policy and no non_interruptive: every seat gets OpenRig's team
+# launch default, so harness permission prompts and warning screens stay on.
+# The README's "Permissions" section says what each seat asks about.
+
+pods:
+  - id: orch
+    label: Orchestration
+    summary: Starts from your goal, scopes the work, checks the builder's result and keeps the pull request description true.
+    members:
+      - id: lead
+        agent_ref: "local:agents/workshop"
+        profile: lead
+        runtime: codex
+        cwd: "."
+        # Opt-in network for this Codex seat, approvals kept; see the README,
+        # "Codex seats and the sandbox".
+        # codex_config_profile: workshop-duo-net
+        startup:
+          files:
+            - path: startup/lead-first-move.md
+              delivery_hint: send_text
+              required: true
+    edges: []
+
+  - id: dev
+    label: Development
+    summary: Builds and tests the change on its own branch.
+    members:
+      - id: build
+        agent_ref: "local:agents/workshop"
+        profile: builder
+        runtime: claude-code
+        cwd: "."
+    edges: []
+
+edges:
+  - kind: delegates_to
+    from: orch.lead
+    to: dev.build

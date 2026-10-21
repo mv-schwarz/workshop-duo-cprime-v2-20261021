@@ -1,0 +1,17 @@
+# Modified by mv-schwarz, 2026-10-21, from Workshop's bundle.yaml
+# (github.com/mvschwarz/openrig-world, rigs/workshop, Apache-2.0): preconditions
+# rewritten for the ask-first posture. See NOTICE.
+#
+# Read by OpenRig when it builds this rig into a bundle. Local-folder builds
+# must pass --min-cli-version and --min-daemon-version to carry these minimums.
+compatibility:
+  min_cli_version: "0.6.6"
+  min_daemon_version: "0.6.6"
+
+# preconditions: what to know and do before installing, shown before install.
+# OpenRig shows them; it doesn't run or check them.
+preconditions:
+  - name: Open a shell at the root of your clone of the repository you want to work on, set up the way its README says, and run the install from that same shell.
+  - name: "Keep OpenRig's files out of your commits: from the root of your clone, add CLAUDE.local.md, AGENTS.md, /.openrig/ and .claude/settings.local.json to .git/info/exclude (the README has the command). The lead adds any that are missing when it starts."
+  - name: "Both seats keep their permission prompts: answer them in each seat's terminal. A Codex seat's default sandbox has no network, so it can't reach the OpenRig daemon until you approve, or until you set up the optional workshop-duo-net profile the README describes. All-Claude configurations are unaffected."
+  - name: "If you ask Claude Code to install this for you, it may decline the rig up line because it starts new agents. Run rig up yourself in a terminal, from the root of your clone."

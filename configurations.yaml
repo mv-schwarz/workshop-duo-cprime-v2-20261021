@@ -1,0 +1,18 @@
+# Modified by mv-schwarz, 2026-10-21, from Workshop's configurations.yaml
+# (github.com/mvschwarz/openrig-world, rigs/workshop, Apache-2.0): two seats,
+# and the Pi preset and profiles removed. See NOTICE.
+#
+# Every configuration installs once as workshop-duo. These are runtime choices
+# for the installing agent to match to available logins, not separate rig names.
+# `rig bundle configurations rig.yaml` lists them with their configuration IDs, and
+# `rig bundle create rig.yaml --preset <name>` (or `--seat pod.member=runtime`) builds one.
+# Format: openrig.bundle-configurations/v1 (OpenRig's docs/reference/bundle-formats.md).
+schema: openrig.bundle-configurations/v1
+recommended: recommended
+seats:
+  orch.lead: { runtimes: { codex: lead, claude-code: lead } }
+  dev.build: { runtimes: { claude-code: builder, codex: builder } }
+presets:
+  recommended: { orch.lead: codex, dev.build: claude-code }
+  all-claude: { orch.lead: claude-code, dev.build: claude-code }
+  all-codex: { orch.lead: codex, dev.build: codex }

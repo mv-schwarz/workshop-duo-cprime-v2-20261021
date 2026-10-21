@@ -1,0 +1,23 @@
+workshop-duo
+Copyright 2026 mv-schwarz
+
+This product is a derivative of Workshop, part of openrig-world:
+  https://github.com/mvschwarz/openrig-world (folder rigs/workshop)
+  at commit fa38c9b55e013e600a3472d2f7561df32df79ce8
+  Copyright 2026 Mike Schwarz
+  Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Changes from Workshop: reduced to two seats (lead and builder), the Pi
+configuration and Pi-only skills removed, OpenRig-repository-specific
+guidance removed, and the permission posture changed from builtin:yolo to
+OpenRig's ask-first team launch default with an "Ask before anything risky"
+rule. Each modified file states that it was modified at its top.
+
+agents/workshop/skills/ is copied unmodified from Workshop, which generated it
+from the OpenRig product's openrig-core skills; its Apache License 2.0 text is
+in agents/workshop/skills/LICENSE.
+
+agents/workshop/bundle-skills/ponytail/ is copied unmodified from
+https://github.com/DietrichGebert/ponytail at
+0e3fd0cfeeea6ed0081e5ee0e169d8521dd3750e, Copyright (c) 2026 DietrichGebert,
+licensed under the MIT License (see agents/workshop/bundle-skills/ponytail/LICENSE).
