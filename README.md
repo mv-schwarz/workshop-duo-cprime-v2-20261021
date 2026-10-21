@@ -73,12 +73,16 @@ from the root of your clone.
 From the root of your project's clone, preview, then install and launch:
 
 ```sh
-rig bundle install <link to this folder at a commit> --preset recommended --target ~/rigs/workshop-duo --cwd . --plan
-rig bundle install <link to this folder at a commit> --preset recommended --target ~/rigs/workshop-duo --cwd .
+rig bundle install https://github.com/mv-schwarz/workshop-duo-cprime-v2-20261021/tree/50f8a2018121623d06111fb221e43afa06f981fc --preset recommended --target ~/rigs/workshop-duo --cwd . --plan
+rig bundle install https://github.com/mv-schwarz/workshop-duo-cprime-v2-20261021/tree/50f8a2018121623d06111fb221e43afa06f981fc --preset recommended --target ~/rigs/workshop-duo --cwd .
 ```
 
 For one provider, use `--preset all-claude` or `--preset all-codex` with the
 same target. `--cwd .` selects your project.
+
+The link is pinned to the first published commit; a commit can't name itself,
+so later commits that only change this README keep it. For the version
+reviewed for openrig.dev/rigs, use the commit its listing shows.
 
 Talk to the lead: `rig capture orch-lead@workshop-duo` reads its screen and
 `rig send orch-lead@workshop-duo "<message>"` writes to it, or attach with
