@@ -81,8 +81,7 @@ For one provider, use `--preset all-claude` or `--preset all-codex` with the
 same target. `--cwd .` selects your project.
 
 The link is pinned to the first published commit; a commit can't name itself,
-so later commits that only change this README keep it. For the version
-reviewed for openrig.dev/rigs, use the commit its listing shows.
+so later commits that only change this README keep it.
 
 Talk to the lead: `rig capture orch-lead@workshop-duo` reads its screen and
 `rig send orch-lead@workshop-duo "<message>"` writes to it, or attach with
